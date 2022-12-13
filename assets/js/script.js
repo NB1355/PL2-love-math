@@ -95,7 +95,7 @@ function checkAnswer() {
    
     if (userAnswer === result) {
         document.getElementById("message").textContent = ("Hey! You got it right! :D");
-        scorePlus ();
+        // scorePlus ();
 
     } else {
         document.getElementById("message").textContent = (`Awwww.... you answered ${userAnswer}. The correct answer is  ${result}!`);
