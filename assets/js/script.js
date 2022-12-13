@@ -1,82 +1,83 @@
 document.addEventListener("DOMContentLoaded", function () {
 
-
-
     let buttons = document.getElementsByTagName("button");
-
 
     for (let button of buttons) {
         button.addEventListener("click", function () {
             if (this.getAttribute("data-type") === "submit") {
-                alert("You clicked Submit!");
-
+                checkAnswer();
 
             } else {
                 let gameType = this.getAttribute("data-type");
                 runGame(gameType);
-                console.log(gameType);
             }
         });
     }
-
 });
-
-
 
 
 function runGame(gameType) {
 
-    // Creates two random numbers between 1 and 25
     let num1 = Math.floor(Math.random() * 25) + 1;
     let num2 = Math.floor(Math.random() * 25) + 1;
 
-    document.getElementById('operand1').textContent = num1;
-    document.getElementById('operand2').textContent = num2;
     document.getElementById('=').textContent = "=";
+    document.getElementById("answer-box").style.backgroundColor = "white";
+
+    if (gameType === "subtract") {
+        document.getElementById('operand1').textContent = Math.max(num1, num2);
+        document.getElementById('operand2').textContent = Math.min(num1, num2);
+    } else {
+        document.getElementById('operand1').textContent = num1;
+        document.getElementById('operand2').textContent = num2;
+    }
+
+    document.getElementById('=').textContent = "=";
+    document.getElementById("answer-box").style.backgroundColor = "white";
+
     switch (gameType) {
         // default:
         //     document.getElementById('operator').textContent = "?";
 
         case "addition":
             document.getElementById('operator').textContent = "+";
+            result = num1 + num2;
             break;
         case "subtract":
             document.getElementById('operator').textContent = "-";
+            result = Math.max(num1, num2) - Math.min(num1, num2);;
             break;
         case "multiply":
             document.getElementById('operator').textContent = "x";
+            result = num1 * num2;
             break;
         case "division":
             document.getElementById('operator').textContent = "/";
+            result = num1 / num2;
             break;
     }
-    document.getElementById("answer-box").style.backgroundColor ="white";
+
+    console.log(result);
 
 }
+
 
 function checkAnswer() {
 
-}
+    let userAnswer = parseInt(document.getElementById("answer-box").value);
 
-function calculateCorrectAnswer() {
-    let operand1 = parseInt(document.getElementById('operand1').innerText);
-    let operand2 = parseInt(document.getElementById('operand2').innerText);
-    let operator = document.getElementById("operator").innerText;
-
-    if (operator === "+") {
-        return [operand1 + operand2, "addition"];
+    if (userAnswer === result) {
+        alert("Hey! You got it right! :D");
     } else {
-        alert(`Unimplemented operator ${operator}`);
-        throw `Unimplemented operator ${operator}. Aborting!`;
+        alert("Awwww.... You got it wrong! :/");
     }
-
 }
 
 
-function incrementScore() {
+// // function incrementScore() {
 
-}
+// // }
 
-function incrementWrongAnswer() {
+// // function incrementWrongAnswer() {
 
-}
+// // }
