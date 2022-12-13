@@ -6,10 +6,12 @@ document.addEventListener("DOMContentLoaded", function () {
         button.addEventListener("click", function () {
             if (this.getAttribute("data-type") === "submit") {
                 checkAnswer();
+                // document.getElementById("answer-box").textContent = null; not working ?!!!!!!!!!!!!!!
 
             } else {
                 let gameType = this.getAttribute("data-type");
                 runGame(gameType);
+                moveOnMax();
             }
         });
     }
@@ -21,8 +23,10 @@ function runGame(gameType) {
     let num1 = Math.floor(Math.random() * 25) + 1;
     let num2 = Math.floor(Math.random() * 25) + 1;
 
-    document.getElementById('=').textContent = "=";
+    document.getElementById("=").textContent = "=";
+    document.getElementById("message").textContent = "Enter and submit your answer!";
     document.getElementById("answer-box").style.backgroundColor = "white";
+
 
     if (gameType === "subtract") {
         document.getElementById('operand1').textContent = Math.max(num1, num2);
@@ -61,15 +65,21 @@ function runGame(gameType) {
 
 }
 
+function newRound() {
+
+    document.getElementsByTagName('input').value = "";
+
+}
+
 
 function checkAnswer() {
 
     let userAnswer = parseInt(document.getElementById("answer-box").value);
-
     if (userAnswer === result) {
-        alert("Hey! You got it right! :D");
+        document.getElementById("message").textContent = ("Hey! You got it right! :D");
     } else {
-        alert("Awwww.... You got it wrong! :/");
+        document.getElementById("message").textContent = (`Awwww.... you answered ${userAnswer}. The correct answer is  ${result}!`);
+
     }
 }
 
@@ -81,3 +91,15 @@ function checkAnswer() {
 // // function incrementWrongAnswer() {
 
 // // }
+
+
+
+
+function moveOnMax(event, field, nextFieldID) {
+    event = event || window.event;
+    if (event.keyCode != 9) {
+        if (field.value.length >= field.maxLength) {
+            nextFieldID.focus();
+        }
+    }
+}
