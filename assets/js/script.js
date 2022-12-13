@@ -6,20 +6,33 @@ document.addEventListener("DOMContentLoaded", function () {
         button.addEventListener("click", function () {
             if (this.getAttribute("data-type") === "submit") {
                 checkAnswer();
-                // document.getElementById("answer-box").textContent = null; not working ?!!!!!!!!!!!!!!
+                newRound();
+               
 
             } else {
                 let gameType = this.getAttribute("data-type");
                 runGame(gameType);
-                moveOnMax();
+                
             }
         });
     }
+
+    document.getElementById("answer-box").addEventListener("keydown", function(event) {
+        if (event.key === "Enter") {
+            checkAnswer();
+            newRound(); 
+        }
+    });
+
+    
+
 });
 
 
 function runGame(gameType) {
-
+    
+    document.getElementById("answer-box").focus();
+    
     let num1 = Math.floor(Math.random() * 25) + 1;
     let num2 = Math.floor(Math.random() * 25) + 1;
 
@@ -63,11 +76,14 @@ function runGame(gameType) {
 
     console.log(result);
 
+
 }
 
 function newRound() {
 
-    document.getElementsByTagName('input').value = "";
+   
+    document.getElementById("answer-box").value = null; 
+
 
 }
 
@@ -75,31 +91,29 @@ function newRound() {
 function checkAnswer() {
 
     let userAnswer = parseInt(document.getElementById("answer-box").value);
+   
+   
     if (userAnswer === result) {
         document.getElementById("message").textContent = ("Hey! You got it right! :D");
+        scorePlus ();
+
     } else {
         document.getElementById("message").textContent = (`Awwww.... you answered ${userAnswer}. The correct answer is  ${result}!`);
-
+        scoreMinus ();
     }
 }
 
+function scorePlus (){
+    let oldScore = parseInt(document.getElementById("score").innerText);
+    document.getElementById("score").innerText = ++oldScore;
 
-// // function incrementScore() {
-
-// // }
-
-// // function incrementWrongAnswer() {
-
-// // }
-
-
-
-
-function moveOnMax(event, field, nextFieldID) {
-    event = event || window.event;
-    if (event.keyCode != 9) {
-        if (field.value.length >= field.maxLength) {
-            nextFieldID.focus();
-        }
-    }
 }
+
+
+function scoreMinus (){
+    let oldScore = parseInt(document.getElementById("incorrect").innerText);
+    document.getElementById("incorrect").innerText = ++oldScore;
+
+}
+
+
