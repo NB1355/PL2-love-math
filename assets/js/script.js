@@ -74,8 +74,6 @@ function runGame(gameType) {
             break;
     }
 
-    console.log(result);
-
 
 }
 
