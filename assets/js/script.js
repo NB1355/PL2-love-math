@@ -1,16 +1,16 @@
-document.addEventListener("DOMContentLoaded", function() {
-    
+document.addEventListener("DOMContentLoaded", function () {
 
-    
+
+
     let buttons = document.getElementsByTagName("button");
-    
+
 
     for (let button of buttons) {
-        button.addEventListener("click", function() {
+        button.addEventListener("click", function () {
             if (this.getAttribute("data-type") === "submit") {
                 alert("You clicked Submit!");
 
-            
+
             } else {
                 let gameType = this.getAttribute("data-type");
                 runGame(gameType);
@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         });
     }
-    
+
 });
 
 
@@ -29,28 +29,28 @@ function runGame(gameType) {
     // Creates two random numbers between 1 and 25
     let num1 = Math.floor(Math.random() * 25) + 1;
     let num2 = Math.floor(Math.random() * 25) + 1;
-    
-    document.getElementById('operand1').textContent = num1;
-    document.getElementById('operand2').textContent = num2;  
 
-    switch(gameType) {
-        default:
-            document.getElementById('operator').textContent = "?";
-        
+    document.getElementById('operand1').textContent = num1;
+    document.getElementById('operand2').textContent = num2;
+    document.getElementById('=').textContent = "=";
+    switch (gameType) {
+        // default:
+        //     document.getElementById('operator').textContent = "?";
+
         case "addition":
             document.getElementById('operator').textContent = "+";
-          break;
+            break;
         case "subtract":
             document.getElementById('operator').textContent = "-";
-          break;
+            break;
         case "multiply":
-            document.getElementById('operator').textContent = "*";
-          break;
+            document.getElementById('operator').textContent = "x";
+            break;
         case "division":
             document.getElementById('operator').textContent = "/";
-          break;
-        
-      } 
+            break;
+    }
+    document.getElementById("answer-box").style.backgroundColor ="white";
 
 }
 
@@ -80,4 +80,3 @@ function incrementScore() {
 function incrementWrongAnswer() {
 
 }
-

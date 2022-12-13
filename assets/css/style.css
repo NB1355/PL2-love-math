@@ -65,19 +65,20 @@ body {
     font-weight: bold;
 }
 
-.answer-message {
-    display: none;
+/* .answer-message {
+    display:inline-block;
     font-size: 1rem;
-}
+} */
 
 #answer-box {
     border: none;
-    color: #445361;
+    color: #b1c3d3;
     background-color:#E6ECF0;
     display: inline-block;
     height: 40px;
     width: 80px;
     font-size: 1.2rem;
+    
 }
 
 .scores {
