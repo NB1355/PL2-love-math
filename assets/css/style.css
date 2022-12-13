@@ -73,6 +73,7 @@ body {
 #answer-box {
     border: none;
     color: #445361;
+    background-color:#E6ECF0;
     display: inline-block;
     height: 40px;
     width: 80px;
